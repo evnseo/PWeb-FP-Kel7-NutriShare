@@ -239,4 +239,5 @@ footer {
 
 footer p {
     color: var(--primaryBackgroundColor);
+    font-weight: 500;
 }
