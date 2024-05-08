@@ -8,8 +8,8 @@ if(isset($_POST['submit'])){
 
    $name = mysqli_real_escape_string($conn, $_POST['name']);
    $email = mysqli_real_escape_string($conn, $_POST['email']);
-   $pass = md5($_POST['password']);
-   $cpass = md5($_POST['cpassword']);
+   $pass = $_POST['password'];
+   $cpass = $_POST['cpassword'];
    $user_type = $_POST['user_type'];
 
    $select = " SELECT * FROM tbl_user WHERE email_user = '$email' && password_user = '$pass' ";
@@ -23,17 +23,17 @@ if(isset($_POST['submit'])){
       if($row['user_type'] == 'admin'){
 
          $_SESSION['admin_name'] = $row['nama_user'];
-         header('location:admin_page.php');
+         header('location:dashboard_admin.php');
 
       }elseif($row['user_type'] == 'user'){
 
          $_SESSION['user_name'] = $row['nama_user'];
-         header('location:user_page.php');
+         header('location:dashboard_user.php');
 
       }elseif($row['user_type'] == 'koor'){
 
          $_SESSION['user_name'] = $row['nama_user'];
-         header('location:koordinator_page.php');
+         header('location:dashboard_koor.php');
      
    }else{
       $error[] = 'incorrect email or password!';
@@ -51,7 +51,7 @@ if(isset($_POST['submit'])){
    <title>Login Form</title>
 
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="styles/page-style.css">
+   <link rel="stylesheet" href="./styles/page-style.css">
 
 </head>
 <body>

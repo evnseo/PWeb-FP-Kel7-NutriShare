@@ -6,8 +6,8 @@ if(isset($_POST['submit'])){
 
    $name = mysqli_real_escape_string($conn, $_POST['name']);
    $email = mysqli_real_escape_string($conn, $_POST['email']);
-   $pass = md5($_POST['password']);
-   $cpass = md5($_POST['cpassword']);
+   $pass = $_POST['password'];
+   $cpass = $_POST['cpassword'];
    $user_type = $_POST['user_type'];
 
    $select = " SELECT * FROM tbl_user WHERE email_user = '$email' && password_user= '$pass' ";
@@ -43,7 +43,7 @@ if(isset($_POST['submit'])){
    <title>Register Form</title>
 
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="styles/page-style.css">
+   <link rel="stylesheet" href="./styles/page-style.css">
 
 </head>
 <body>
