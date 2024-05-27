@@ -75,6 +75,10 @@ if(!isset($_SESSION['admin_name'])){
                         </ol>
                         <div class="card mb-4">
                             <div class="card-header">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambah">
+                                Tambah Data
+                                </button>
+                                <a href="export_data_donasi.php" class="btn btn-info">Export Data</a>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">

@@ -27,14 +27,11 @@ if(!isset($_SESSION['admin_name'])){
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <a class="navbar-brand" href="dashboard-admin.php">Dashboard Admin</a>
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
-            <!-- Navbar-->
+            <!-- Navbar--> 
             <ul class="navbar-nav ml-auto ml-md-0">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#">Settings</a>
-                        <a class="dropdown-item" href="#">Activity Log</a>
-                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="logout.php">Logout</a>
                     </div>
                 </li>
@@ -79,6 +76,7 @@ if(!isset($_SESSION['admin_name'])){
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambah">
                                 Tambah Data
                                 </button>
+                                <a href="export_data_admin.php" class="btn btn-info">Export Data</a>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -131,7 +129,7 @@ if(!isset($_SESSION['admin_name'])){
                                                         <input type="hidden" name="id" value="<?php echo $id;?>">
                                                         <input type="varchar" name="name" value="<?=$nama;?>" class="form-control" required>
                                                         <br>
-                                                        <input type="varchar" name="email"value="<?=$email;?>" class="form-control" required>
+                                                        <input type="varchar" name="email" value="<?=$email;?>" class="form-control" required>
                                                         <br>
                                                         <input type="varchar" name="password" value="<?=$pass;?>" class="form-control" required>
                                                         <br>
@@ -212,7 +210,7 @@ if(!isset($_SESSION['admin_name'])){
         <script src="assets/demo/datatables-demo.js"></script>
     </body>
 
-        <!-- The Modal -->
+    <!-- The Modal -->
     <div class="modal fade" id="tambah">
         <div class="modal-dialog">
         <div class="modal-content">

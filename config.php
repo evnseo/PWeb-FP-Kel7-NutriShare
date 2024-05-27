@@ -83,4 +83,57 @@ if(isset($_POST['deletedonasi'])){
         header('location:dashboard_datadonasi.php');
     }
 }
+
+//tambah data jadwal
+if(isset($_POST['addnewjadwal'])){
+    $tgl =  $_POST['tgl'];
+    $ket = $_POST['ket'];
+    $id = $_POST['id'];
+    $koor = $_POST['koor'];
+    $id_koor = $_POST['id_koor'];
+
+    $insert = "INSERT INTO tbl_jadwal(tanggal, keterangan_jadwal, nama_koor, id_user) VALUES('$tgl','$ket','$koor','$id_koor')";
+         mysqli_query($conn, $insert);
+    if($insert){
+        header('location:dashboard_datajadwal.php');
+    } else {
+        echo 'Gagal';
+        header('location:dashboard_datajadwal.php');
+    }
+}
+
+//update data jadwal
+if(isset($_POST['updatejadwal'])){
+    $tgl =  $_POST['tgl'];
+    $ket = $_POST['ket'];
+    $id = $_POST['id'];
+    $id_user = $_POST['id_user'];
+
+    $nama_koor = mysqli_query($conn, "SELECT nama_user FROM tbl_user WHERE id_user = '$id_user'");
+    $koor= mysqli_fetch_array($nama_koor)["nama_user"];
+
+    $update = "UPDATE tbl_jadwal SET tanggal='$tgl', keterangan_jadwal='$ket', nama_koor='$koor' where id_jadwal='$id'";
+         mysqli_query($conn, $update);
+    if($update){
+        header('location:dashboard_datajadwal.php');
+    } else {
+        echo 'Gagal';
+        header('location:dashboard_datajadwal.php');
+    }
+}
+
+//hapus data jadwal
+if(isset($_POST['deletejadwal'])){
+    $id = $_POST['id'];
+
+    $delete = "DELETE FROM tbl_jadwal where id_jadwal='$id'";
+         mysqli_query($conn, $delete);
+    if($delete){
+        header('location:dashboard_datajadwal.php');
+    } else {
+        echo 'Gagal';
+        header('location:dashboard_datajadwal.php');
+    }
+}
 ?>
+

@@ -75,32 +75,118 @@ if(!isset($_SESSION['admin_name'])){
                         </ol>
                         <div class="card mb-4">
                             <div class="card-header">
-                                <i class="fas fa-table mr-1"></i>
-                                DataTable Example
+                                <!-- Button to Open the Modal -->
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambah">
+                                Tambah Data
+                                </button>
+                                <a href="export_data_jadwal.php" class="btn btn-info">Export Data</a>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                                <th>Start date</th>
-                                                <th>Salary</th>
+                                                <th>Nomor</th>
+                                                <th>Tanggal</th>
+                                                <th>Keterangan</th>
+                                                <th>Nama Koordinator</th>
+                                                <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <?php
+                                            $ambilsemuadatajadwal = mysqli_query($conn, "select * from tbl_jadwal");
+                                            $i = 1;
+                                            while ($data = mysqli_fetch_array($ambilsemuadatajadwal)) {
+                                                $id = $data['id_jadwal'];
+                                                $tgl = $data['tanggal'];
+                                                $ket = $data['keterangan_jadwal'];
+                                                $koor = $data['nama_koor'];
+                                                $id_user = $data['id_user'];
+                                            ?> 
                                             <tr>
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                                <td>Edinburgh</td>
-                                                <td>61</td>
-                                                <td>2011/04/25</td>
-                                                <td>$320,800</td>
+                                                <td><?=$i++;?></td>
+                                                <td><?=$tgl;?></td>
+                                                <td><?=$ket;?></td>
+                                                <td><?=$koor;?></td>
+                                                <td>
+                                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit<?=$id;?>">Edit</button>
+                                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete<?=$id;?>">Delete</button>
+                                                </td>
                                             </tr>
-                                            
+
+                                                <!-- edit modal -->
+                                                <div class="modal fade" id="edit<?=$id;?>">
+                                                    <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                    
+                                                        <!-- Modal Header -->
+                                                        <div class="modal-header">
+                                                        <h4 class="modal-title">Edit Data</h4>
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        </div>
+                                                                
+                                                        <!-- Modal body -->
+                                                        <form method="post">
+                                                        <div class="modal-body">
+                                                        <input type="hidden" name="id" value="<?php echo $id;?>">
+                                                        Tanggal
+                                                        <input type="date" name="tgl" value="<?=$tgl;?>" class="form-control" required>
+                                                        <br>
+                                                        Keterangan Jadwal
+                                                        <input type="varchar" name="ket" value="<?=$ket;?>" class="form-control" required>
+                                                        <br>
+                                                        Koordinator
+                                                        <select name="koor" required>
+                                                        <option value="">Select a user</option>
+                                                            <?php
+                                                            $type = "koor";
+                                                            $ambildatauser = mysqli_query($conn, "select id_user, nama_user from tbl_user where user_type='$type'");
+                                                            while ($data = mysqli_fetch_array($ambildatauser)) {
+                                                                echo "<option value='" . $data["id_user"] . "'>" . $data["nama_user"] . "</option>";
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                        <br>
+                                                        <br>
+                                                        <button type="submit" class="btn btn-primary" name="updatejadwal">Submit</button>
+                                                        </div>
+                                                        </form>  
+
+                                                    </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- delete modal -->
+                                                <div class="modal fade" id="delete<?=$id;?>">
+                                                    <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                    
+                                                        <!-- Modal Header -->
+                                                        <div class="modal-header">
+                                                        <h4 class="modal-title">Delete Data</h4>
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        </div>
+                                                                
+                                                        <!-- Modal body -->
+                                                        <form method="post">
+                                                        <div class="modal-body">
+                                                        Apakah Anda yakin ingin menghapus data ini?
+                                                        <input type="hidden" name="id" value="<?php echo $id;?>">
+                                                        <br>
+                                                        <br>
+                                                        <button type="submit" class="btn btn-danger" name="deletejadwal">Submit</button>
+                                                        </div>
+                                                        </form>  
+
+                                                    </div>
+                                                    </div>
+                                                </div>
+
+
+                                            <?php
+                                            }
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -132,4 +218,47 @@ if(!isset($_SESSION['admin_name'])){
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
         <script src="assets/demo/datatables-demo.js"></script>
     </body>
+
+    <!-- The Modal -->
+    <div class="modal fade" id="tambah">
+        <div class="modal-dialog">
+        <div class="modal-content">
+      
+            <!-- Modal Header -->
+            <div class="modal-header">
+            <h4 class="modal-title">Tambah Data</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            
+            <!-- Modal body -->
+            <form method="post">
+            <div class="modal-body">
+                <?php
+                $type = "koor";
+                $ambildatauser = mysqli_query($conn, "select id_user, nama_user from tbl_user where user_type='$type'");
+                while ($data = mysqli_fetch_array($ambildatauser)) {
+                    $id_koor= $data['id_user'];
+                    $koor = $data['nama_user'];
+                ?>
+                <input type="hidden" name="id_koor" value="<?php echo $id_koor;?>">
+                Tanggal
+                <input type="date" name="tgl" placeholder="Tanggal" class="form-control" required>
+                <br>
+                Keterangan Jadwal
+                <input type="varchar" name="ket" placeholder="Keterangan" class="form-control" required>
+                <br>
+                Koordinator
+                <select name="koor" required>
+                    <option value="<?=$koor?>"><?=$koor?></option>
+                    <?php
+                    }
+                    ?>
+                </select>
+                <br>
+                <br>
+                <button type="submit" class="btn btn-primary" name="addnewjadwal">Submit</button>
+            </div>
+            </form>
+        </div>
+    </div>
 </html>

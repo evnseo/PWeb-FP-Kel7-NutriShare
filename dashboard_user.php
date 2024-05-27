@@ -32,9 +32,6 @@ if(!isset($_SESSION['user_name'])){
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#">Settings</a>
-                        <a class="dropdown-item" href="#">Activity Log</a>
-                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="logout.php">Logout</a>
                     </div>
                 </li>
@@ -67,7 +64,7 @@ if(!isset($_SESSION['user_name'])){
                     <div class="container-fluid">
                         <h1 class="mt-4">Mulai Donasi</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Klik Tombol Mulai Donasi Untuk Memulai Proses Donasi</li>
+                            <li class="breadcrumb-item active">Klik tombol "Mulai Donasi" untuk memulai proses donasi.</li>
                         </ol>
                         <div class="card mb-4">
                             <div class="card-header">
@@ -115,7 +112,7 @@ if(!isset($_SESSION['user_name'])){
       
             <!-- Modal Header -->
             <div class="modal-header">
-            <h4 class="modal-title">Mulai Donasi</h4>
+            <h4 class="modal-title">Form Donasi</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             
