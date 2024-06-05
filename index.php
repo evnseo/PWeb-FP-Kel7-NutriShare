@@ -5,7 +5,7 @@
         <meta http-equiv="X-A-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>NutriShare</title>
-        <link rel="stylesheet" href="./styles/home-style.css">
+        <link rel="stylesheet" href="assets/styles/home-style.css" />
     </head>
 
     <body>
@@ -43,7 +43,7 @@
                         <button class="btn" onclick="location.href='login_form.php';">Mulai Berbagi!</button>
                     </div>
                     <div class="hero-right">
-                        <img src="./images/image-1.jpg" alt="donation" />
+                        <img src="assets/images/image-1.jpg" alt="donation" />
                     </div>
                 </section>
             </div>

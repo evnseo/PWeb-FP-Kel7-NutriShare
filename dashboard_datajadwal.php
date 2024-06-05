@@ -19,7 +19,7 @@ if(!isset($_SESSION['admin_name'])){
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Data Jadwal</title>
-        <link href="./styles/dashboard-style.css" rel="stylesheet" />
+        <link href="assets/styles/dashboard-style.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
     </head>
@@ -233,14 +233,6 @@ if(!isset($_SESSION['admin_name'])){
             <!-- Modal body -->
             <form method="post">
             <div class="modal-body">
-                <?php
-                $type = "koor";
-                $ambildatauser = mysqli_query($conn, "select id_user, nama_user from tbl_user where user_type='$type'");
-                while ($data = mysqli_fetch_array($ambildatauser)) {
-                    $id_koor= $data['id_user'];
-                    $koor = $data['nama_user'];
-                ?>
-                <input type="hidden" name="id_koor" value="<?php echo $id_koor;?>">
                 Tanggal
                 <input type="date" name="tgl" placeholder="Tanggal" class="form-control" required>
                 <br>
@@ -249,11 +241,15 @@ if(!isset($_SESSION['admin_name'])){
                 <br>
                 Koordinator
                 <select name="koor" required>
-                    <option value="<?=$koor?>"><?=$koor?></option>
-                    <?php
-                    }
-                    ?>
+                <?php
+                $type = "koor";
+                $ambildatauser = mysqli_query($conn, "select id_user, nama_user from tbl_user where user_type='$type'");
+                while ($data = mysqli_fetch_array($ambildatauser)) {
+                    echo "<option value='" . $data["id_user"] . "'>" . $data["nama_user"] . "</option>";
+                }
+                ?>
                 </select>
+                <input type="hidden" name="id_koor" value="<?$data["id_user"]?>">
                 <br>
                 <br>
                 <button type="submit" class="btn btn-primary" name="addnewjadwal">Submit</button>

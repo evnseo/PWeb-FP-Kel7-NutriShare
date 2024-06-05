@@ -172,6 +172,7 @@ nav ul li a {
     transition: .2s ease-in-out;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 .btn:hover {
     background: var(--primaryIconColorHover);
     color: var(--primaryBackgroundColor);
