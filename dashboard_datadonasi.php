@@ -32,9 +32,6 @@ if(!isset($_SESSION['admin_name'])){
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#">Settings</a>
-                        <a class="dropdown-item" href="#">Activity Log</a>
-                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="logout.php">Logout</a>
                     </div>
                 </li>
@@ -73,11 +70,17 @@ if(!isset($_SESSION['admin_name'])){
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">List data donasi website NutriShare</li>
                         </ol>
+                        <div class="col-xl-6">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-chart-bar mr-1"></i>
+                                    Bar Chart
+                                </div>
+                                <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+                            </div>
+                        </div>
                         <div class="card mb-4">
                             <div class="card-header">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambah">
-                                Tambah Data
-                                </button>
                                 <a href="export_data_donasi.php" class="btn btn-info">Export Data</a>
                             </div>
                             <div class="card-body">
@@ -89,6 +92,7 @@ if(!isset($_SESSION['admin_name'])){
                                                 <th>Nama Donatur</th>
                                                 <th>Email</th>
                                                 <th>Nomor Telepon</th>
+                                                <th>Tanggal Donasi</th>
                                                 <th>Jumlah</th>
                                                 <th>Metode Pembayaran</th>
                                                 <th>Aksi</th>
@@ -103,6 +107,7 @@ if(!isset($_SESSION['admin_name'])){
                                                 $nama = $data['nama_donatur'];
                                                 $email = $data['email_donatur'];
                                                 $telp = $data['notelp_donatur'];
+                                                $tgl = $data['tanggal_donasi'];
                                                 $jumlah = $data['jumlah'];
                                                 $metode = $data['metode_bayar'];
                                             ?>  
@@ -111,6 +116,7 @@ if(!isset($_SESSION['admin_name'])){
                                                 <td><?=$nama;?></td>
                                                 <td><?=$email;?></td>
                                                 <td><?=$telp;?></td>
+                                                <td><?=$tgl;?></td>
                                                 <td><?=$jumlah;?></td>
                                                 <td><?=$metode;?></td>
                                                 <td>
@@ -134,17 +140,26 @@ if(!isset($_SESSION['admin_name'])){
                                                         <form method="post">
                                                         <div class="modal-body">
                                                         <input type="hidden" name="id" value="<?php echo $id;?>">
+                                                        Nama
                                                         <input type="varchar" name="name" value="<?=$nama;?>" class="form-control" required>
                                                         <br>
+                                                        Email
                                                         <input type="varchar" name="email"value="<?=$email;?>" class="form-control" required>
                                                         <br>
+                                                        Nomor Telepon
                                                         <input type="num" name="telp" value="<?=$telp;?>" class="form-control" required>
+                                                        <br>
+                                                        Tanggal Donasi
+                                                        <input type="date" name="tgl" value="<?=$tgl;?>" class="form-control" required>
+                                                        <br>
+                                                        Jumlah Donasi
                                                         <input type="num" name="jumlah" value="<?=$jumlah;?>" class="form-control" required>
                                                         <br>
+                                                        Metode Pembayaran
                                                         <select name="metode" required>
-                                                            <option value="qris">Qris</option>
-                                                            <option value="transfer">Transfer Bank</option>
-                                                        </select>
+                                                            <option value="qris" <?php echo ($metode == 'Qris') ? 'selected' : ''; ?>>Qris</option>
+                                                            <option value="transfer" <?php echo ($metode == 'transfer') ? 'selected' : ''; ?>>Transfer Bank</option>
+                                                        </select> 
                                                         <br>
                                                         <br>
                                                         <button type="submit" class="btn btn-primary" name="updatedonasi">Submit</button>

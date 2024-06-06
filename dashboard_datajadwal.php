@@ -32,9 +32,6 @@ if(!isset($_SESSION['admin_name'])){
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#">Settings</a>
-                        <a class="dropdown-item" href="#">Activity Log</a>
-                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="logout.php">Logout</a>
                     </div>
                 </li>
@@ -138,12 +135,15 @@ if(!isset($_SESSION['admin_name'])){
                                                         <br>
                                                         Koordinator
                                                         <select name="koor" required>
-                                                        <option value="">Select a user</option>
                                                             <?php
                                                             $type = "koor";
                                                             $ambildatauser = mysqli_query($conn, "select id_user, nama_user from tbl_user where user_type='$type'");
                                                             while ($data = mysqli_fetch_array($ambildatauser)) {
-                                                                echo "<option value='" . $data["id_user"] . "'>" . $data["nama_user"] . "</option>";
+                                                                if ($data['id_user'] == $id_user) {
+                                                                    echo "<option value='" . $data["id_user"] . "' selected>" . $data["nama_user"] . "</option>";
+                                                                } else {
+                                                                    echo "<option value='" . $data["id_user"] . "'>" . $data["nama_user"] . "</option>";
+                                                                }
                                                             }
                                                             ?>
                                                         </select>

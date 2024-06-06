@@ -47,10 +47,6 @@ if(!isset($_SESSION['user_name'])){
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Mulai Donasi
                             </a>
-                            <a class="nav-link" href="dashboard_user.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Riwayat
-                            </a>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
@@ -71,12 +67,6 @@ if(!isset($_SESSION['user_name'])){
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mulaidonasi">
                                 Mulai Donasi
                                 </button>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    </table>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -119,27 +109,29 @@ if(!isset($_SESSION['user_name'])){
             <!-- Modal body -->
             <form method="post">
             <div class="modal-body">
-            <input type="hidden" name="id" value="<?php echo $id;?>">
-            Nama Donatur
-            <input type="varchar" name="name" placeholder="Masukkan nama Anda " class="form-control" required>
-            <br>
-            Email
-            <input type="varchar" name="email" placeholder="Masukkan email Anda" class="form-control" required>
-            <br>
-            Nomor Telepon
-            <input type="num" name="telp" placeholder="Masukkan nomor telepon Anda" class="form-control" required>
-            <br>
-            Jumlah Donasi
-            <input type="num" name="jumlah" placeholder="Masukkan nominal yang ingin didonasikan" class="form-control" required>
-            <br>
-            Metode Pembayaran
-            <select name="metode" required>
-                <option value="qris">Qris</option>
-                <option value="transfer">Transfer Bank</option>
-            </select>
-            <br>
-            <br>
-            <button type="submit" class="btn btn-primary" name="addnewdonasi">Submit</button>
+                Nama Donatur
+                <input type="varchar" name="name" placeholder="Masukkan nama Anda " class="form-control" required>
+                <br>
+                Email
+                <input type="varchar" name="email" placeholder="Masukkan email Anda" class="form-control" required>
+                <br>
+                Nomor Telepon
+                <input type="num" name="telp" placeholder="Masukkan nomor telepon Anda" class="form-control" required>
+                <br>
+                Tanggal
+                <input type="date" name="tgl" placeholder="Tanggal" class="form-control" required>
+                <br>
+                Jumlah Donasi
+                <input type="num" name="jumlah" placeholder="Masukkan nominal yang ingin didonasikan" class="form-control" required>
+                <br>
+                Metode Pembayaran
+                <select name="metode" required>
+                    <option value="qris">Qris</option>
+                    <option value="transfer">Transfer Bank</option>
+                </select>
+                <br>
+                <br>
+                <button type="submit" class="btn btn-primary" name="addnewdonasi">Submit</button>
             </div>
             </form>
         </div>

@@ -127,16 +127,20 @@ if(!isset($_SESSION['admin_name'])){
                                                         <form method="post">
                                                         <div class="modal-body">
                                                         <input type="hidden" name="id" value="<?php echo $id;?>">
+                                                        Nama User
                                                         <input type="varchar" name="name" value="<?=$nama;?>" class="form-control" required>
                                                         <br>
+                                                        Email
                                                         <input type="varchar" name="email" value="<?=$email;?>" class="form-control" required>
                                                         <br>
+                                                        Password
                                                         <input type="varchar" name="password" value="<?=$pass;?>" class="form-control" required>
                                                         <br>
+                                                        User Type
                                                         <select name="user_type" required>
-                                                            <option value="user">User</option>
-                                                            <option value="admin">Admin</option>
-                                                            <option value="koor">Koordinator</option>
+                                                            <option value="user" <?php echo ($user_type == 'user') ? 'selected' : ''; ?>>User</option>
+                                                            <option value="admin" <?php echo ($user_type == 'admin') ? 'selected' : ''; ?>>Admin</option>
+                                                            <option value="koor" <?php echo ($user_type == 'koor') ? 'selected' : ''; ?>>Koordinator</option>
                                                         </select>
                                                         <br>
                                                         <br>
@@ -224,12 +228,16 @@ if(!isset($_SESSION['admin_name'])){
             <!-- Modal body -->
             <form method="post">
             <div class="modal-body">
+                Nama
                 <input type="varchar" name="name" placeholder="Nama" class="form-control" required>
                 <br>
+                Email
                 <input type="varchar" name="email" placeholder="Email" class="form-control" required>
                 <br>
+                Password
                 <input type="varchar" name="password" placeholder="Password" class="form-control" required>
                 <br>
+                User Type
                 <select name="user_type" required>
                     <option value="user">User</option>
                     <option value="admin">Admin</option>

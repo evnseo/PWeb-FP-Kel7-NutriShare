@@ -51,16 +51,53 @@ if(isset($_POST['deleteuser'])){
     }
 }
 
+//insert data donasi
+if(isset($_POST['addnewdonasi'])){
+    echo "<pre>";     //console log
+    print_r($_POST);
+    echo "</pre>";
+
+    $name =  $_POST['name'];
+    $email = $_POST['email'];
+    $telp = $_POST['telp'];
+    $tgl = $_POST['tgl'];
+    $jumlah = $_POST['jumlah'];
+    $metode = $_POST['metode'];
+
+    // Debugging output
+    echo "<pre>";
+    echo "Nama: " . $name . "\n";
+    echo "Email: " . $email . "\n";
+    echo "Telp: " . $telp . "\n";
+    echo "Tanggal: " . $tgl . "\n";
+    echo "Jumlah: " . $jumlah . "\n";
+    echo "Metode: " . $metode . "\n";
+    echo "</pre>";
+
+    $insert = "INSERT INTO tbl_donasi(nama_donatur, email_donatur, notelp_donatur, tanggal_donasi, jumlah, metode_bayar) VALUES('$name','$email','$telp','$tgl','$jumlah','$metode')";
+    if (mysqli_query($conn, $insert)) {
+        echo 'Berhasil menyimpan data donasi';
+        header('Location: dashboard_user.php');
+        exit();
+    } else {
+        echo 'Gagal menyimpan data';
+        header('Location: dashboard_user.php');
+        exit();
+    }
+}
+
+
 //update data donasi
 if(isset($_POST['updatedonasi'])){
     $name =  $_POST['name'];
     $email = $_POST['email'];
     $telp = $_POST['telp'];
+    $tgl = $_POST['tgl'];
     $jumlah = $_POST['jumlah'];
     $metode = $_POST['metode'];
     $id = $_POST['id'];
 
-    $update = "UPDATE tbl_donasi SET nama_donatur='$name', email_donatur='$email', notelp_donatur='$telp', jumlah='$jumlah' where id_donasi='$id'";
+    $update = "UPDATE tbl_donasi SET nama_donatur='$name', email_donatur='$email', notelp_donatur='$telp', tanggal_donasi='$tgl', jumlah='$jumlah', metode_bayar='$metode' where id_donasi='$id'";
          mysqli_query($conn, $update);
     if($update){
         header('location:dashboard_datadonasi.php');
@@ -86,39 +123,68 @@ if(isset($_POST['deletedonasi'])){
 
 //tambah data jadwal
 if(isset($_POST['addnewjadwal'])){
-    $tgl =  $_POST['tgl'];
-    $ket = $_POST['ket'];
-    $id = $_POST['id'];
-    $koor = $_POST['koor'];
-    $id_koor = $_POST['id_koor'];
+    echo "<pre>";
+    print_r($_POST);
+    echo "</pre>";
 
-    $insert = "INSERT INTO tbl_jadwal(tanggal, keterangan_jadwal, nama_koor, id_user) VALUES('$tgl','$ket','$koor','$id_koor')";
-         mysqli_query($conn, $insert);
-    if($insert){
-        header('location:dashboard_datajadwal.php');
+    $tgl = $_POST['tgl'];
+    $ket = $_POST['ket'];
+    $koor = $_POST['koor']; // ini adalah id_user
+
+    // Ambil nama_user berdasarkan id_user yang dipilih
+    $query = "SELECT nama_user FROM tbl_user WHERE id_user='$koor'";
+    $result = mysqli_query($conn, $query);
+    $data = mysqli_fetch_array($result);
+    $nama_koor = $data['nama_user'];
+
+    // Insert data ke tabel tbl_jadwal
+    $insert = "INSERT INTO tbl_jadwal (tanggal, keterangan_jadwal, nama_koor, id_user) VALUES ('$tgl', '$ket', '$nama_koor', '$koor')";
+    if (mysqli_query($conn, $insert)) {
+        header('Location: dashboard_datajadwal.php');
+        exit();
     } else {
-        echo 'Gagal';
-        header('location:dashboard_datajadwal.php');
+        echo 'Gagal menyimpan data';
+        header('Location: dashboard_datajadwal.php');
+        exit();
     }
 }
 
 //update data jadwal
 if(isset($_POST['updatejadwal'])){
-    $tgl =  $_POST['tgl'];
-    $ket = $_POST['ket'];
     $id = $_POST['id'];
-    $id_user = $_POST['id_user'];
+    $tgl = $_POST['tgl'];
+    $ket = $_POST['ket'];
+    $koor = $_POST['koor'];
 
-    $nama_koor = mysqli_query($conn, "SELECT nama_user FROM tbl_user WHERE id_user = '$id_user'");
-    $koor= mysqli_fetch_array($nama_koor)["nama_user"];
+    // Debugging output
+    //echo "<pre>";
+    //echo "ID: " . $id . "\n";
+    //echo "Tanggal: " . $tgl . "\n";
+    //echo "Keterangan: " . $ket . "\n";
+    //echo "Koordinator ID: " . $koor . "\n";
+    //echo "</pre>";
 
-    $update = "UPDATE tbl_jadwal SET tanggal='$tgl', keterangan_jadwal='$ket', nama_koor='$koor' where id_jadwal='$id'";
-         mysqli_query($conn, $update);
-    if($update){
-        header('location:dashboard_datajadwal.php');
+    // Ambil nama_user berdasarkan id_user yang dipilih
+    $query = "SELECT nama_user FROM tbl_user WHERE id_user='$koor'";
+    $result = mysqli_query($conn, $query);
+    $data = mysqli_fetch_array($result);
+
+    // Debugging output for $data
+    echo "<pre>";
+    print_r($data);
+    echo "</pre>";
+
+    $nama_koor = $data['nama_user'];
+
+    // Insert atau update data ke tabel tbl_jadwal
+    $update = "UPDATE tbl_jadwal SET tanggal='$tgl', keterangan_jadwal='$ket', nama_koor='$nama_koor', id_user='$koor' WHERE id_jadwal='$id'";
+    if (mysqli_query($conn, $update)) {
+        header('Location: dashboard_datajadwal.php');
+        exit();
     } else {
-        echo 'Gagal';
-        header('location:dashboard_datajadwal.php');
+        echo 'Gagal menyimpan data';
+        header('Location: dashboard_datajadwal.php');
+        exit();
     }
 }
 
