@@ -116,7 +116,7 @@ if(!isset($_SESSION['user_name'])){
                 <input type="varchar" name="email" placeholder="Masukkan email Anda" class="form-control" required>
                 <br>
                 Nomor Telepon
-                <input type="num" name="telp" placeholder="Masukkan nomor telepon Anda" class="form-control" required>
+                <input type="varchar" name="telp" placeholder="Masukkan nomor telepon Anda" class="form-control" required>
                 <br>
                 Tanggal
                 <input type="date" name="tgl" placeholder="Tanggal" class="form-control" required>

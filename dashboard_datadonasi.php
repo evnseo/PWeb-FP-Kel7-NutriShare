@@ -147,7 +147,7 @@ if(!isset($_SESSION['admin_name'])){
                                                         <input type="varchar" name="email"value="<?=$email;?>" class="form-control" required>
                                                         <br>
                                                         Nomor Telepon
-                                                        <input type="num" name="telp" value="<?=$telp;?>" class="form-control" required>
+                                                        <input type="varchar" name="telp" value="<?=$telp;?>" class="form-control" required>
                                                         <br>
                                                         Tanggal Donasi
                                                         <input type="date" name="tgl" value="<?=$tgl;?>" class="form-control" required>
