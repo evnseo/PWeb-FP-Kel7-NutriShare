@@ -8,6 +8,36 @@ if(!isset($_SESSION['admin_name'])){
    header('location:login_form.php');
 }
 
+$sql = "SELECT COUNT(*) as totaladmin FROM tbl_user WHERE user_type = 'admin'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $total_admin = $row['totaladmin'];
+} else {
+    $total_admin = 0;
+}
+
+$sql = "SELECT COUNT(*) as totalkoor FROM tbl_user WHERE user_type = 'koor'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $total_koor = $row['totalkoor'];
+} else {
+    $total_admin = 0;
+}
+
+$sql = "SELECT COUNT(*) as totaluser FROM tbl_user WHERE user_type = 'user'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $total_user = $row['totaluser'];
+} else {
+    $total_admin = 0;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -70,6 +100,35 @@ if(!isset($_SESSION['admin_name'])){
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">List data user website NutriShare</li>
                         </ol>
+                        <div class="row">
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-primary text-white mb-4">
+                                    <div class="card-body">Total Admin: <?php echo $total_admin;?></div>
+                                        <div class="card-footer d-flex align-items-center justify-content-between">
+                                            <a class="small text-white stretched-link" href="#dataTable">View Details</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-primary text-white mb-4">
+                                    <div class="card-body">Total Koordinator: <?php echo $total_koor;?></div>
+                                        <div class="card-footer d-flex align-items-center justify-content-between">
+                                            <a class="small text-white stretched-link" href="#dataTable">View Details</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-primary text-white mb-4">
+                                    <div class="card-body">Total User: <?php echo $total_user;?></div>
+                                        <div class="card-footer d-flex align-items-center justify-content-between">
+                                            <a class="small text-white stretched-link" href="#dataTable">View Details</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <!-- Button to Open the Modal -->
